@@ -124,7 +124,7 @@ jobs:
       - name: Upload truck artifact
         uses: actions/upload-artifact@v6
         with:
-          name: truck-files
+          name: truck-output
           path: |
             build/truck.txt
             build/spare_parts_truck.txt
