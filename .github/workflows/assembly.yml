@@ -166,14 +166,13 @@ jobs:
 
   # BUG 2: needs: build_truck is missing — test_truck may start before build_truck finishes
   test_truck:
-    needs: build_truck
     runs-on: ubuntu-latest
     steps:
       # BUG 1: artifact name is wrong — 'truck-output' does not exist; should be 'truck-files'
       - name: Download truck artifact
         uses: actions/download-artifact@v7
         with:
-          name: truck-files
+          name: truck-output
           path: build/
 
       - name: Test truck
@@ -208,7 +207,7 @@ jobs:
     needs: [test_car, test_motorbike, test_truck]
     runs-on: ubuntu-latest
     continue-on-error: true
-    # if: needs.test_car.result == 'passed'
+    if: needs.test_car.result == 'passed'
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v7
